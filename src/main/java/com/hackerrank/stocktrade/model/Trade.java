@@ -1,14 +1,31 @@
 package com.hackerrank.stocktrade.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.annotations.SQLDelete;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
 import java.sql.Timestamp;
 
-public class Trade {
+@Entity
+//@SQLDelete(sql = "UPDATE trade SET status=false WHERE id=?")
+//@Table(name = "trade")
+public class Trade implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
     private String type;
+//    @JoinColumn(referencedColumnName = "id")
+//    @ManyToOne(cascade = CascadeType.ALL)
     private User user;
     private String symbol;
     private Integer shares;
     private Float price;
+//    @Column(name = "timestamp", updatable = false, columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
+//    @Temporal(value = TemporalType.TIMESTAMP)
+@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp timestamp;
     
     public Trade() {
@@ -72,7 +89,7 @@ public class Trade {
         this.price = price;
     }
     
-    public Timestamp getTimestamp() {
+    public Date getTimestamp() {
         return this.timestamp;
     }
     

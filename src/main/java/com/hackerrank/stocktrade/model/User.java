@@ -1,6 +1,16 @@
 package com.hackerrank.stocktrade.model;
 
-public class User {
+import org.hibernate.annotations.SQLDelete;
+
+import javax.persistence.*;
+import java.io.Serializable;
+
+@Entity
+//@SQLDelete(sql = "UPDATE users SET status=false WHERE id=?")
+public class User implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
     private String name;
     
