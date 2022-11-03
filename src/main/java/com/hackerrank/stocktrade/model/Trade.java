@@ -9,12 +9,9 @@ import java.util.Date;
 import java.sql.Timestamp;
 
 @Entity
-//@SQLDelete(sql = "UPDATE trade SET status=false WHERE id=?")
-//@Table(name = "trade")
 public class Trade implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private Long id;
     private String type;
 //    @JoinColumn(referencedColumnName = "id")

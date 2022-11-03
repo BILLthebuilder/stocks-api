@@ -11,9 +11,6 @@ import java.util.Optional;
 
 @Repository
 public interface TradeRepository extends JpaRepository<Trade,Long>{
-//    Optional<Trade> findTradesByIdOrderByIdAsc(long tradeId);
-//    Optional<Trade> deleteTradeById(long tradeId);
-//    Optional<Trade> findTradesByUser_IdOrderByIdAsc(long userId);
 Optional<List<Trade>> findByUserOrderByIdAsc(User user);
     List<Trade>  findAllByOrderByIdAsc();
     Optional<Trade> findTradesBySymbolAndTypeAndTimestamp(String symbol, String type, Date timestamp);

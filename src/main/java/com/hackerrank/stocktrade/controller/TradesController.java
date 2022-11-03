@@ -20,7 +20,7 @@ public class TradesController {
     }
 
     @PostMapping
-    public ResponseEntity<?>create(CreateTradeRequest request){
+    public ResponseEntity<String>create(@RequestBody CreateTradeRequest request){
        return tradeService.createTrade(request);
     }
 

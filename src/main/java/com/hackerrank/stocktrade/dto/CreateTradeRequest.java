@@ -11,14 +11,17 @@ public class CreateTradeRequest {
     Integer shares;
     Float price;
 
+    String userName;
 
-    public CreateTradeRequest(Long id, User user, String type, String symbol, Integer shares, Float price) {
+
+    public CreateTradeRequest(Long id, User user, String type, String symbol, Integer shares, Float price, String userName) {
         this.id = id;
         this.user = user;
         this.type = type;
         this.symbol = symbol;
         this.shares = shares;
         this.price = price;
+        this.userName = userName;
     }
 
     public CreateTradeRequest() {
@@ -70,5 +73,13 @@ public class CreateTradeRequest {
 
     public void setPrice(Float price) {
         this.price = price;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }
