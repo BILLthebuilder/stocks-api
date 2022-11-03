@@ -34,6 +34,7 @@ public class TradeService {
     @Transactional
     public ResponseEntity<String> createTrade(CreateTradeRequest request){
         Trade trade = new Trade();
+        User user = new User();
 //        trade.setType(request.getType());
 //        trade.setUser(request.getUser());
 //        trade.setSymbol(request.getSymbol());
@@ -69,7 +70,7 @@ public class TradeService {
     @Transactional
     public ResponseEntity<List<Trade>>  findTradeByUserId(long id){
         Optional<User> user = userRepository.findById(id);
-
+        System.out.println("ISpresent>>>>>>>>"+user.get());
         if (user.isPresent()) {
             Optional<List<Trade>> trade = tradeRepository.findByUserOrderByIdAsc(user.get());
             if (trade.isPresent())

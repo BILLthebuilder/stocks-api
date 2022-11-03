@@ -14,8 +14,8 @@ public class Trade implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String type;
-//    @JoinColumn(referencedColumnName = "id")
-//    @ManyToOne(cascade = CascadeType.ALL)
+   // @JoinColumn(name="id")
+    @ManyToOne
     private User user;
     private String symbol;
     private Integer shares;

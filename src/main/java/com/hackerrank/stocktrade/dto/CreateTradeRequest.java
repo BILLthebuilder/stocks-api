@@ -12,20 +12,15 @@ public class CreateTradeRequest {
     String symbol;
     Integer shares;
     Float price;
-
-    String userName;
-
     String timestamp;
 
-
-    public CreateTradeRequest(Long id, User user, String type, String symbol, Integer shares, Float price, String userName, String timestamp) {
+    public CreateTradeRequest(Long id, User user, String type, String symbol, Integer shares, Float price, String timestamp) {
         this.id = id;
         this.user = user;
         this.type = type;
         this.symbol = symbol;
         this.shares = shares;
         this.price = price;
-        this.userName = userName;
         this.timestamp = timestamp;
     }
 
@@ -78,14 +73,6 @@ public class CreateTradeRequest {
 
     public void setPrice(Float price) {
         this.price = price;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getTimestamp() {
