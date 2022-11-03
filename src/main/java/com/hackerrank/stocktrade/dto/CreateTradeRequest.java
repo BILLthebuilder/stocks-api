@@ -2,6 +2,8 @@ package com.hackerrank.stocktrade.dto;
 
 import com.hackerrank.stocktrade.model.User;
 
+import java.sql.Timestamp;
+
 public class CreateTradeRequest {
 
     Long id;
@@ -13,8 +15,10 @@ public class CreateTradeRequest {
 
     String userName;
 
+    String timestamp;
 
-    public CreateTradeRequest(Long id, User user, String type, String symbol, Integer shares, Float price, String userName) {
+
+    public CreateTradeRequest(Long id, User user, String type, String symbol, Integer shares, Float price, String userName, String timestamp) {
         this.id = id;
         this.user = user;
         this.type = type;
@@ -22,6 +26,7 @@ public class CreateTradeRequest {
         this.shares = shares;
         this.price = price;
         this.userName = userName;
+        this.timestamp = timestamp;
     }
 
     public CreateTradeRequest() {
@@ -81,5 +86,13 @@ public class CreateTradeRequest {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -42,6 +43,12 @@ public class TradeService {
         Optional<Trade> tradeFind = tradeRepository.findById(request.getId());
         if (!tradeFind.isPresent()) {
             userRepository.save(request.getUser());
+                    trade.setType(request.getType());
+        trade.setUser(request.getUser());
+        trade.setSymbol(request.getSymbol());
+        trade.setShares(request.getShares());
+        trade.setPrice(request.getPrice());
+        trade.setTimestamp(Timestamp.valueOf((String)request.getTimestamp()));
             tradeRepository.save(trade);
             return new ResponseEntity<>(HttpStatus.CREATED);
 
