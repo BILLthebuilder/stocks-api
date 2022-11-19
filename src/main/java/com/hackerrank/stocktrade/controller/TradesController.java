@@ -1,5 +1,6 @@
 package com.hackerrank.stocktrade.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.hackerrank.stocktrade.dto.CreateTradeRequest;
 import com.hackerrank.stocktrade.model.Trade;
 import com.hackerrank.stocktrade.service.TradeService;
@@ -25,7 +26,7 @@ public class TradesController {
     }
 
     @GetMapping(value="/{id}")
-    private ResponseEntity<Trade> getTradeById(@PathVariable(value="id") Long id){
+    private ResponseEntity<?> getTradeById(@PathVariable(value="id") Long id){
         return tradeService.findTradeById(id);
 
     }
