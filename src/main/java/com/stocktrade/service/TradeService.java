@@ -1,25 +1,23 @@
-package com.hackerrank.stocktrade.service;
+package com.stocktrade.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hackerrank.stocktrade.dto.CreateTradeRequest;
-import com.hackerrank.stocktrade.model.Trade;
-import com.hackerrank.stocktrade.model.User;
-import com.hackerrank.stocktrade.repository.TradeRepository;
-import com.hackerrank.stocktrade.repository.UserRepository;
+import com.stocktrade.dto.CreateTradeRequest;
+import com.stocktrade.model.Trade;
+import com.stocktrade.model.User;
+import com.stocktrade.repository.TradeRepository;
+import com.stocktrade.repository.UserRepository;
 import org.springframework.data.domain.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 
 @Service
@@ -39,22 +37,39 @@ public class TradeService {
         tradeRepository.deleteAll();
     }
     @Transactional
-    public ResponseEntity<String> createTrade(CreateTradeRequest request){
+    public ResponseEntity<String> createTrade(Long id, CreateTradeRequest request){
         Trade trade = new Trade();
-        //Optional<Trade> tradeFind = tradeRepository.findById(trade.getId());
-        if (!(request == null)) {
-            userRepository.save(request.getUser());
+        User user =  request.getUser();
+        Optional<Trade> tradeFind;
+        try {
+            if (id != null) {
+                tradeFind = tradeRepository.findById(id);
+                if (tradeFind.isPresent()) {
+                    user.setName(request.getUser().getName());
+                    userRepository.save(user);
                     trade.setType(request.getType());
-        trade.setUser(request.getUser());
-        trade.setSymbol(request.getSymbol());
-        trade.setShares(request.getShares());
-        trade.setPrice(request.getPrice());
-        //trade.setTimestamp(Timestamp.valueOf((String)request.getTimestamp()));
+                    trade.setUser(request.getUser());
+                    trade.setSymbol(request.getSymbol());
+                    trade.setShares(request.getShares());
+                    trade.setPrice(request.getPrice());
+                    tradeRepository.save(trade);
+                    return new ResponseEntity<>(HttpStatus.CREATED);
+                } else {
+                    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                }
+            }
+            userRepository.save(request.getUser());
+            trade.setType(request.getType());
+            trade.setUser(request.getUser());
+            trade.setSymbol(request.getSymbol());
+            trade.setShares(request.getShares());
+            trade.setPrice(request.getPrice());
+            //trade.setTimestamp(Timestamp.valueOf((String)request.getTimestamp()));
             tradeRepository.save(trade);
             return new ResponseEntity<>(HttpStatus.CREATED);
-
-        } else
+        }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
     @Transactional
     public ResponseEntity<?> findTradeById(long id){
@@ -93,11 +108,24 @@ public class TradeService {
     Date startDate_ = formatter.parse(startDate);
     Date endDate_ = formatter.parse(endDate);
     Pageable pageable = PageRequest.of(0, 3);
-    List<Trade> trades = tradeRepository.findTradesBySymbolAndTypeAndDateCreated(symbol,startDate_,endDate_);
+    List<Trade> trades = tradeRepository.findTradesBySymbolAndDateCreatedBetween(symbol,startDate_,endDate_);
     if(!trades.isEmpty()){
         return new ResponseEntity<>(trades,HttpStatus.OK);
     }
 
     return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 };
+    @Transactional
+    public ResponseEntity<?> findTradesByDatecreated(String date) throws ParseException{
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date dateCreated = formatter.parse(date);
+        System.out.println(dateCreated);
+        List<Trade> trades = tradeRepository.findTradeByDateCreated(dateCreated);
+        if(!trades.isEmpty()){
+            return new ResponseEntity<>(trades,HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+    }
 }

@@ -4,7 +4,7 @@
 
     <name>StockTradeApi</name>
 
-    <groupId>com.hackerrank</groupId>
+    <groupId>com.stocktrade</groupId>
     <artifactId>stocktrade</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>

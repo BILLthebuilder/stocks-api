@@ -1,8 +1,7 @@
-package com.hackerrank.stocktrade.controller;
+package com.stocktrade.controller;
 
-import com.hackerrank.stocktrade.model.Trade;
-import com.hackerrank.stocktrade.service.TradeService;
-import org.springframework.data.domain.Page;
+import com.stocktrade.model.Trade;
+import com.stocktrade.service.TradeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.text.ParseException;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -28,4 +26,5 @@ public class StocksController {
                                                                       @PathVariable(value = "endDate")String endDate) throws ParseException {
         return tradeService.findTradesBySymbolAndDateCreatedBetween(symbol,startDate,endDate);
     };
+
 }

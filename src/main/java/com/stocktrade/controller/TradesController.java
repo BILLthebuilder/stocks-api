@@ -1,13 +1,12 @@
-package com.hackerrank.stocktrade.controller;
+package com.stocktrade.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.hackerrank.stocktrade.dto.CreateTradeRequest;
-import com.hackerrank.stocktrade.model.Trade;
-import com.hackerrank.stocktrade.service.TradeService;
-import org.springframework.http.HttpStatus;
+import com.stocktrade.dto.CreateTradeRequest;
+import com.stocktrade.model.Trade;
+import com.stocktrade.service.TradeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -22,13 +21,18 @@ public class TradesController {
 
     @PostMapping
     public ResponseEntity<String>create(@RequestBody CreateTradeRequest request){
-       return tradeService.createTrade(request);
+       return tradeService.createTrade(null,request);
     }
 
     @GetMapping(value="/{id}")
     private ResponseEntity<?> getTradeById(@PathVariable(value="id") Long id){
         return tradeService.findTradeById(id);
 
+    }
+
+    @PutMapping(value = "/{id}")
+    private ResponseEntity<?>updateTrade(@PathVariable(value="id") Long id,@RequestBody CreateTradeRequest request){
+        return tradeService.createTrade(id,request);
     }
 
     @GetMapping
@@ -41,5 +45,10 @@ public class TradesController {
     private ResponseEntity<List<Trade>> getTradeByUserId(@PathVariable(value="UserId") Long UserId ) {
         return tradeService.findTradeByUserId(UserId);
 
+    }
+
+    @GetMapping(value="/date/{date}")
+    public ResponseEntity<?> findTradesByDate(@PathVariable(value = "date") String date) throws ParseException {
+        return tradeService.findTradesByDatecreated(date);
     }
 }

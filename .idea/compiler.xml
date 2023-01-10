@@ -7,6 +7,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="13454813-4687-4b74-bdd2-70e5f129d556" />
         <module name="stocktrade" />
       </profile>
     </annotationProcessing>

@@ -1,8 +1,6 @@
-package com.hackerrank.stocktrade.dto;
+package com.stocktrade.dto;
 
-import com.hackerrank.stocktrade.model.User;
-
-import java.sql.Timestamp;
+import com.stocktrade.model.User;
 
 public class CreateTradeRequest {
 

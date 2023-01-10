@@ -1,4 +1,4 @@
-package com.hackerrank.stocktrade.dto;
+package com.stocktrade.dto;
 
 public class UserDto {
     Long id;

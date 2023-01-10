@@ -1,8 +1,7 @@
-package com.hackerrank.stocktrade.model;
+package com.stocktrade.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.annotations.SQLDelete;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,7 +12,7 @@ import java.util.List;
 //@SQLDelete(sql = "UPDATE users SET status=false WHERE id=?")
 public class User implements Serializable {
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
 

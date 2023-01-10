@@ -1,6 +1,6 @@
-package com.hackerrank.stocktrade.controller;
+package com.stocktrade.controller;
 
-import com.hackerrank.stocktrade.service.TradeService;
+import com.stocktrade.service.TradeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
